@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1D4ED8;
+  --color-primary-dark: #1E40AF;
+  --color-accent: #F97316;
+  --color-gray-50: #F3F4F6;
+  --color-gray-100: #E5E7EB;
+  --color-gray-200: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-600: #6B7280;
+  --color-blue-50: #EFF6FF;
+}
+
+@layer base {
+  * {
+    /* Utilise box-border (tailwind fourni) au lieu d'une utilité inexistante `border-border` */
+    @apply box-border;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    @apply bg-gray-50 text-gray-900;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  h2 {
+    font-size: 28px;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  p, span, div, input, button, label {
+    font-size: 15px;
+  }
+
+  button {
+    font-weight: 500;
+  }
+}
+
+@layer utilities {
+  .btn-primary {
+    @apply bg-[#1D4ED8] text-white rounded-lg px-6 py-3 transition-colors hover:bg-[#1E40AF];
+  }
+
+  .btn-secondary {
+    @apply bg-[#F97316] text-white rounded-lg px-6 py-3 transition-colors hover:bg-[#EA580C];
+  }
+
+  .card {
+    @apply bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow;
+  }
+
+  .input-field {
+    @apply w-full border border-[#D1D5DB] rounded-md px-4 py-2.5 placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#1D4ED8] focus:border-transparent;
+  }
+}

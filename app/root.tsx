@@ -5,10 +5,15 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useNavigate,
 } from "react-router";
+import { useState } from "react";
+import { Header } from "./components/header";
+import { Footer } from "./components/footer";
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import "./styles/tailwind.css";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -42,7 +47,46 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState("home");
+
+  // `onNavigate` passe la cible en interne au header et effectue
+  // la navigation via `useNavigate` — garde la logique centralisée
+  const onNavigate = (page: string) => {
+    setCurrentPage(page);
+    // Map logical page names used throughout the app to real route paths
+    const map: Record<string, string> = {
+      home: '/',
+      dashboard: '/dashboard',
+      'mes-demandes': '/mes-demandes',
+      'mesdemandes': '/mes-demandes',
+      'my-requests': '/mes-demandes',
+      messagerie: '/messagerie',
+      messages: '/messagerie',
+      profil: '/profil',
+      profile: '/profil',
+      notification: '/notification',
+      notifications: '/notification',
+      login: '/login',
+      register: '/register',
+      'profil/modifier': '/profil/modifier',
+      'profil/supprimer': '/profil/supprimer',
+      'notification/:id': '/notification',
+    };
+
+    const target = map[page] ?? `/${page}`;
+    navigate(target);
+  };
+
+  return (
+    <>
+      <Header currentPage={currentPage} onNavigate={onNavigate} />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
+    </>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
