@@ -1,8 +1,20 @@
 import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
 export default [
-    index("routes/home.tsx"),
+    index("routes/HomePage.tsx"),
     route("dashboard", "routes/dashboard.tsx"),
+
+    // Authentification
+    route("login", "routes/LoginPage.tsx"),
+    route("register", "routes/RegisterPage.tsx"),
+    route("forgot-password", "routes/ForgotPasswordPage.tsx"),
+
+    // Services
+    route("services", "routes/ServicesPage.tsx"),
+    route("services/:id", "routes/ServiceDetailPage.tsx"),
+    route("create-service", "routes/CreateServicePage.tsx"),
+    route("my-services", "routes/MyServicesPage.tsx"),
+    route("edit-service/:id", "routes/EditServicePage.tsx"),
 
     // Mes demandes
     route("mes-demandes", "routes/mesdemandes.tsx"),
@@ -20,5 +32,8 @@ export default [
     route("notification", "routes/notification.tsx"),
     route("notification/:id", "routes/notification-detail.tsx"),
     route("notification/:id/supprimer", "routes/notification-delete.tsx"),
+
+    // Contact
+    route("contact", "routes/ContactPage.tsx"),
 
 ] satisfies RouteConfig;

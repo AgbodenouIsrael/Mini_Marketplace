@@ -54,7 +54,6 @@ export default function App() {
   // la navigation via `useNavigate` — garde la logique centralisée
   const onNavigate = (page: string) => {
     setCurrentPage(page);
-    // Map logical page names used throughout the app to real route paths
     const map: Record<string, string> = {
       home: '/',
       dashboard: '/dashboard',
@@ -69,6 +68,8 @@ export default function App() {
       notifications: '/notification',
       login: '/login',
       register: '/register',
+      services: '/services',
+      contact: '/contact',
       'profil/modifier': '/profil/modifier',
       'profil/supprimer': '/profil/supprimer',
       'notification/:id': '/notification',
