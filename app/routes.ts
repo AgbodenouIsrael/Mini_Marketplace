@@ -2,6 +2,7 @@ import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
 export default [
     index("routes/HomePage.tsx"),
+    route("acceuil", "routes/acceuil.tsx"),
     route("dashboard", "routes/dashboard.tsx"),
 
     // Authentification
@@ -12,7 +13,7 @@ export default [
     // Services
     route("services", "routes/ServicesPage.tsx"),
     route("services/:id", "routes/ServiceDetailPage.tsx"),
-    route("create-service", "routes/CreateServicePage.tsx"),
+    route("CreateServicePage", "routes/CreateServicePage.tsx"),
     route("my-services", "routes/MyServicesPage.tsx"),
     route("edit-service/:id", "routes/EditServicePage.tsx"),
 

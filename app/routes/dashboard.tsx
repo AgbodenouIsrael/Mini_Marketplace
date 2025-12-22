@@ -240,7 +240,7 @@ export default function DashboardPage({ onNavigate }: DashboardPageProps) {
         {/* Quick Action */}
         <div className="mt-8">
           <button
-            onClick={() => navigate('create-service')}
+            onClick={() => navigate('/CreateServicePage')}
             className="btn-primary flex items-center gap-2"
           >
             <Plus size={20} />

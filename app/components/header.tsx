@@ -12,7 +12,7 @@ export function Header({ currentPage, onNavigate, isAuthenticated = false, onLog
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   const navItems = [
-    { id: 'home', label: 'Accueil' },
+    { id: isAuthenticated ? 'acceuil' : 'home', label: 'Accueil' },
     { id: 'services', label: 'Services' },
     { id: 'contact', label: 'Contact' },
   ];

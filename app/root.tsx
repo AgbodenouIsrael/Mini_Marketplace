@@ -7,7 +7,7 @@ import {
   ScrollRestoration,
   useNavigate,
 } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "./components/header";
 import { Footer } from "./components/footer";
 
@@ -49,6 +49,32 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState("home");
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    try {
+      return !!localStorage.getItem('isAuthenticated');
+    } catch (e) {
+      return false;
+    }
+  });
+
+  // Listen for auth changes from other parts of the app (e.g. LoginPage)
+  useEffect(() => {
+    const onAuthChange = () => {
+      try {
+        setIsAuthenticated(!!localStorage.getItem('isAuthenticated'));
+      } catch (e) {
+        setIsAuthenticated(false);
+      }
+    };
+
+    window.addEventListener('authChange', onAuthChange as EventListener);
+    window.addEventListener('storage', onAuthChange as EventListener);
+
+    return () => {
+      window.removeEventListener('authChange', onAuthChange as EventListener);
+      window.removeEventListener('storage', onAuthChange as EventListener);
+    };
+  }, []);
 
   // `onNavigate` passe la cible en interne au header et effectue
   // la navigation via `useNavigate` — garde la logique centralisée
@@ -56,6 +82,7 @@ export default function App() {
     setCurrentPage(page);
     const map: Record<string, string> = {
       home: '/',
+      acceuil: '/acceuil',
       dashboard: '/dashboard',
       'mes-demandes': '/mes-demandes',
       'mesdemandes': '/mes-demandes',
@@ -79,9 +106,19 @@ export default function App() {
     navigate(target);
   };
 
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem('isAuthenticated');
+    } catch (e) {
+      // ignore
+    }
+    setIsAuthenticated(false);
+    navigate('/');
+  };
+
   return (
     <>
-      <Header currentPage={currentPage} onNavigate={onNavigate} />
+      <Header currentPage={currentPage} onNavigate={onNavigate} isAuthenticated={isAuthenticated} onLogout={handleLogout} />
       <main>
         <Outlet />
       </main>

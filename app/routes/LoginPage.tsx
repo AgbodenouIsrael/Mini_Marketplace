@@ -12,6 +12,13 @@ export default function LoginPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    try {
+      localStorage.setItem('isAuthenticated', 'true');
+      // notify the app about auth change
+      try { window.dispatchEvent(new Event('authChange')); } catch (e) { /* ignore */ }
+    } catch (err) {
+      // ignore storage errors
+    }
     navigate('/dashboard');
   };
 

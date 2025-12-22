@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
 import { Upload, ArrowLeft } from 'lucide-react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 export default function CreateServicePage() {
   const navigate = useNavigate();
-  
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -31,13 +30,15 @@ export default function CreateServicePage() {
   return (
     <div className="min-h-screen bg-[#F3F4F6] py-8">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <button
+          onClick={() => navigate('/dashboard')}
+          className="flex items-center gap-2 text-[#6B7280] hover:text-gray-900 mb-6 transition-colors"
+        >
+          <ArrowLeft size={20} />
+          <span>Retour au dashboard</span>
+        </button>
+
         <div className="mb-8">
-          <button
-            onClick={() => navigate('/dashboard')}
-            className="text-[#1D4ED8] hover:underline mb-4 flex items-center gap-2"
-          >
-            ← Retour au tableau de bord
-          </button>
           <h1 className="mb-2 text-gray-900">Publier un service</h1>
           <p className="text-[#6B7280]">
             Remplissez le formulaire pour proposer votre service
